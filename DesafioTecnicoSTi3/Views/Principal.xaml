@@ -1,0 +1,103 @@
+﻿<Window x:Class="DesafioTecnicoSTi3.View.Principal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DesafioTecnicoSTi3.View"
+        mc:Ignorable="d"
+        Title="Desafio STi3" Height="600" Width="1024" WindowStartupLocation="CenterScreen" WindowState="Normal">
+    <Grid Background="#100040">
+        <Grid Margin="10,10,10,10" Background="#000040">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="700"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="13*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
+                        <TextBox Height="25" Width="460" Margin="10,0,10,0">
+                            <TextBox.Effect>
+                                <DropShadowEffect/>
+                            </TextBox.Effect>
+                        </TextBox>
+                        <Button x:Name="BtnConsultar" Content="Consultar" Foreground="WhiteSmoke" FontFamily="Rockwell" 
+                                Background="#FF4000"
+                                Height="25" Width="100" Margin="0,0,10,0" Tag="{Binding}"
+                                Style="{StaticResource BtnPrincipal}" Click="BtnConsultar_Click">
+                            <Button.Effect>
+                                <DropShadowEffect/>
+                            </Button.Effect>
+                        </Button>
+
+                        <Button x:Name="BtnAlgumaCoisa" Content="Não entendi" Foreground="WhiteSmoke" FontFamily="Rockwell" 
+                                Background="#FF4000"
+                                Height="25" Width="100" Margin="0,0,10,0" Tag="{Binding}"
+                                Style="{StaticResource BtnPrincipal}" Click="BtnAlgumaCoisa_Click">
+                            <Button.Effect>
+                                <DropShadowEffect/>
+                            </Button.Effect>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="1">
+
+                    <DataGrid Name="DtPedidos" AutoGenerateColumns="False"
+                              CanUserReorderColumns="False" CanUserResizeColumns="True" CanUserSortColumns="True"
+                              Background="LightGray" Margin="10" ColumnHeaderStyle="{StaticResource DgHeaderPrincipal}" ItemsSource="{Binding PedidosAdicionados}">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="60" Binding="{Binding Numero}" Header="NUMERO"/>
+                            <DataGridTextColumn Width="70" Binding="{Binding Data}" Header="DATA"/>
+                            <DataGridTextColumn Width="390" Binding="{Binding Cliente}" Header="CLIENTE"/>
+                            <DataGridTextColumn Width="70" Binding="{Binding Status}" Header="STATUS"/>
+                            <DataGridTextColumn Width="*" Binding="{Binding ValorTotal}" Header="VALOR TOTAL"/>
+                        </DataGrid.Columns>
+
+                        <DataGrid.Effect>
+                            <DropShadowEffect/>
+                        </DataGrid.Effect>
+                    </DataGrid>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="BtnConfig" Content="Configurações" Foreground="WhiteSmoke" FontFamily="Rockwell" 
+                                Background="#FF4000"
+                                Height="25" Width="100" Margin="170,0,10,0" Tag="{Binding}"
+                                Style="{StaticResource BtnPrincipal}" Click="BtnConfig_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
+
+                <DataGrid Grid.Row="1" Background="LightGray" Margin="10">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" Binding="{Binding}" 
+                                            Header="Detalhes do Pedido" HeaderStyle="{StaticResource DgHeader}">
+
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                    <DataGrid.Effect>
+                        <DropShadowEffect/>
+                    </DataGrid.Effect>
+                </DataGrid>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>
