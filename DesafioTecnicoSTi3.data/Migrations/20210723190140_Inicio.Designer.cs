@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DesafioTecnicoSTi3.data.Migrations
 {
     [DbContext(typeof(DesafioTecnicoSTi3Context))]
-    [Migration("20210723145531_Inicio")]
+    [Migration("20210723190140_Inicio")]
     partial class Inicio
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,14 +20,30 @@ namespace DesafioTecnicoSTi3.data.Migrations
 
             modelBuilder.Entity("DesafioTecnicoSTi3.data.Entidades.Clientes", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    b.Property<string>("Nome")
-                        .HasColumnType("text");
+                    b.Property<string>("cnpj")
+                        .HasColumnType("varchar(100)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("cpf")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("dataNascimento")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("email")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("nome")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("razaoSocial")
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("id");
 
                     b.ToTable("Clientes");
                 });

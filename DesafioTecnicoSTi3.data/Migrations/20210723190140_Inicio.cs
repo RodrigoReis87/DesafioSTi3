@@ -11,13 +11,18 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 name: "Clientes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(type: "text", nullable: true)
+                    cnpj = table.Column<string>(type: "varchar(100)", nullable: true),
+                    cpf = table.Column<string>(type: "varchar(100)", nullable: true),
+                    nome = table.Column<string>(type: "varchar(100)", nullable: true),
+                    razaoSocial = table.Column<string>(type: "varchar(100)", nullable: true),
+                    email = table.Column<string>(type: "varchar(100)", nullable: true),
+                    dataNascimento = table.Column<string>(type: "varchar(100)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clientes", x => x.Id);
+                    table.PrimaryKey("PK_Clientes", x => x.id);
                 });
 
             migrationBuilder.CreateTable(

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DesafioTecnicoSTi3.ViewModel
+﻿namespace DesafioTecnicoSTi3.ViewModel
 {
     public class PedidoViewModel
     {

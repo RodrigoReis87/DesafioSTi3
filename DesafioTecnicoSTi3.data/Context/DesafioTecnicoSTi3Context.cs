@@ -1,4 +1,5 @@
 ﻿using DesafioTecnicoSTi3.data.Entidades;
+using DesafioTecnicoSTi3.data.Mappings;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace DesafioTecnicoSTi3.data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ConfigMapping());
+            modelBuilder.ApplyConfiguration(new ClientesMapping());
 
             base.OnModelCreating(modelBuilder);
         }

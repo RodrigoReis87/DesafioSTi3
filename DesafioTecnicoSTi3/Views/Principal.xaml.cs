@@ -1,7 +1,6 @@
 ﻿using DesafioTecnicoSTi3.data.Context;
 using DesafioTecnicoSTi3.View.UserControls;
 using DesafioTecnicoSTi3.ViewModel;
-using System.Net.Http;
 using System.Windows;
 
 namespace DesafioTecnicoSTi3.View
@@ -32,7 +31,7 @@ namespace DesafioTecnicoSTi3.View
 
         private void BtnConsultar_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void BtnAlgumaCoisa_Click(object sender, RoutedEventArgs e)
@@ -45,7 +44,7 @@ namespace DesafioTecnicoSTi3.View
             UcConfiguracoes Conteudo = new UcConfiguracoes();
             Conteudo.ShowDialog();
         }
-        
-        
+
+
     }
 }
