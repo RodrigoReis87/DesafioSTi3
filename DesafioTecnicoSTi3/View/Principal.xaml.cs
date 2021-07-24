@@ -1,4 +1,5 @@
-﻿using DesafioTecnicoSTi3.data.Context;
+﻿using DesafioTecnicoSTi3.Business;
+using DesafioTecnicoSTi3.data.Context;
 using DesafioTecnicoSTi3.View.UserControls;
 using DesafioTecnicoSTi3.ViewModel;
 using System.Windows;
@@ -11,6 +12,7 @@ namespace DesafioTecnicoSTi3.View
     public partial class Principal : Window
     {
         private UcPedidoViewModel UcPedidoVM = new UcPedidoViewModel();
+        
         public Principal()
         {
             InitializeComponent();
@@ -20,8 +22,6 @@ namespace DesafioTecnicoSTi3.View
             DataContext = UcPedidoVM;
 
         }
-
-
 
         private void AplicarMigracoes()
         {

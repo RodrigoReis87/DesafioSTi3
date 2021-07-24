@@ -24,27 +24,18 @@
                         <ColumnDefinition Width="13*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
-                        <TextBox Height="25" Width="460" Margin="10,0,10,0">
-                            <TextBox.Effect>
-                                <DropShadowEffect/>
-                            </TextBox.Effect>
-                        </TextBox>
+                        <TextBox Height="25" Width="460" Margin="10,0,10,0" Style="{StaticResource EstiloTB}"/>
+                        
                         <Button x:Name="BtnConsultar" Content="Consultar" Foreground="WhiteSmoke" FontFamily="Rockwell" 
                                 Background="#FF4000"
                                 Height="25" Width="100" Margin="0,0,10,0" Tag="{Binding}"
                                 Style="{StaticResource BtnPrincipal}" Click="BtnConsultar_Click">
-                            <Button.Effect>
-                                <DropShadowEffect/>
-                            </Button.Effect>
                         </Button>
 
                         <Button x:Name="BtnAlgumaCoisa" Content="Não entendi" Foreground="WhiteSmoke" FontFamily="Rockwell" 
                                 Background="#FF4000"
                                 Height="25" Width="100" Margin="0,0,10,0" Tag="{Binding}"
                                 Style="{StaticResource BtnPrincipal}" Click="BtnAlgumaCoisa_Click">
-                            <Button.Effect>
-                                <DropShadowEffect/>
-                            </Button.Effect>
                         </Button>
                     </StackPanel>
                 </Grid>
@@ -53,7 +44,8 @@
 
                     <DataGrid Name="DtPedidos" AutoGenerateColumns="False"
                               CanUserReorderColumns="False" CanUserResizeColumns="True" CanUserSortColumns="True"
-                              Background="LightGray" Margin="10" ColumnHeaderStyle="{StaticResource DgHeaderPrincipal}" ItemsSource="{Binding PedidosAdicionados}">
+                              Background="LightGray" Margin="10" ColumnHeaderStyle="{StaticResource DgHeaderPrincipal}" 
+                              ItemsSource="{Binding PedidosAdicionados}">
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="60" Binding="{Binding Numero}" Header="NUMERO"/>
@@ -80,9 +72,6 @@
                                 Background="#FF4000"
                                 Height="25" Width="100" Margin="170,0,10,0" Tag="{Binding}"
                                 Style="{StaticResource BtnPrincipal}" Click="BtnConfig_Click">
-                    <Button.Effect>
-                        <DropShadowEffect/>
-                    </Button.Effect>
                 </Button>
 
                 <DataGrid Grid.Row="1" Background="LightGray" Margin="10">
