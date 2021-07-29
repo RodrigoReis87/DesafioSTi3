@@ -22,6 +22,7 @@ namespace DesafioTecnicoSTi3.data.Context
         public virtual DbSet<Clientes> Clientes { get; set; }
         public virtual DbSet<EnderecoEntrega> EnderecoEntregas { get; set; }
         public virtual DbSet<Item> Itens { get; set; }
+        public virtual DbSet<Pedido> Pedidos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,6 +31,7 @@ namespace DesafioTecnicoSTi3.data.Context
             modelBuilder.ApplyConfiguration(new EnderecoEntregaMapping());
             modelBuilder.ApplyConfiguration(new ItemMapping());
             modelBuilder.ApplyConfiguration(new PagamentoMapping());
+            modelBuilder.ApplyConfiguration(new PedidoMapping());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -69,8 +69,15 @@ namespace DesafioTecnicoSTi3.View
 
                 foreach(var item in obj) 
                 {
-                    string texto = string.Join(Environment.NewLine, item.numero, item.dataCriacao, item.cliente, item.status, item.valorTotal);
+                    string texto = string.Join(Environment.NewLine, item.numero, item.dataCriacao, item.cliente.nome, item.status, item.valorTotal);
                     MessageBox.Show(texto);
+
+                    var pedidos = new PedidoViewModel
+                    {
+                        cod_pedido = UcPedidoVM.cod_pedido
+                        
+                    };
+                    new PedidoBusiness().Adicionar(pedidos);
                 }             
                            
 
