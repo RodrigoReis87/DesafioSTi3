@@ -14,11 +14,14 @@ namespace DesafioTecnicoSTi3.data.Mappings
             builder.Property(p => p.numero).HasColumnType("varchar(100)");
             builder.Property(p => p.dataAlteracao).HasColumnType("datetime");
             builder.Property(p => p.dataCriacao).HasColumnType("datetime");
-            builder.Property(p => p.status).HasColumnType("decimal(15,2)");
-            builder.Property(p => p.desconto).HasColumnType("int(20)");
-            builder.Property(p => p.frete).HasColumnType("int(20)");
+            builder.Property(p => p.status).HasColumnType("varchar(20)");
+            builder.Property(p => p.desconto).HasColumnType("double");
+            builder.Property(p => p.frete).HasColumnType("double");
             builder.Property(p => p.subTotal).HasColumnType("double");
             builder.Property(p => p.valorTotal).HasColumnType("double");
+
+            builder.HasMany(f => f.itens).WithOne(p => p.pedido).HasForeignKey(p => p.codigo_item);
+            builder.HasMany(f => f.pagamento).WithOne(p => p.pedido).HasForeignKey(p => p.cod_pgto);
         }
     }
 }

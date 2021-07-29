@@ -8,7 +8,7 @@ namespace DesafioTecnicoSTi3.data.Entidades
     {
         public long cod_pedido { get; set; }
         public string id { get; set; }
-        public int numero { get; set; }
+        public string numero { get; set; }
         public DateTime dataCriacao { get; set; }
         public DateTime dataAlteracao { get; set; }
         public string status { get; set; }

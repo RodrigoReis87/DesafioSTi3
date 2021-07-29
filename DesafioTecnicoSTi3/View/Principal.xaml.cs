@@ -69,13 +69,38 @@ namespace DesafioTecnicoSTi3.View
 
                 foreach(var item in obj) 
                 {
-                    string texto = string.Join(Environment.NewLine, item.numero, item.dataCriacao, item.cliente, item.status, item.valorTotal);
-                    MessageBox.Show(texto);
-                }             
-                           
+                    UcPedidoVM.id = item.id;
+                    UcPedidoVM.numero = item.numero;
+                    UcPedidoVM.dataAlteracao = item.dataAlteracao;
+                    UcPedidoVM.dataCriacao = item.dataCriacao;
+                    UcPedidoVM.Status = item.status;
+                    UcPedidoVM.desconto = item.desconto;
+                    UcPedidoVM.subTotal = item.subTotal;
+                    UcPedidoVM.ValorTotal = item.valorTotal;
+
+                    GravarPedido();
+
+                }
 
                 
             }
+        }
+
+        private void GravarPedido()
+        {
+
+            var novoPedido = new PedidoViewModel
+            {
+                id = UcPedidoVM.id,
+                numero = UcPedidoVM.numero,
+                dataAlteracao = UcPedidoVM.dataAlteracao,
+                dataCriacao = UcPedidoVM.dataCriacao,
+                status = UcPedidoVM.Status,
+                desconto = UcPedidoVM.desconto,
+                subTotal = UcPedidoVM.subTotal,
+                valorTotal = UcPedidoVM.ValorTotal
+            };
+            new PedidoBusiness().Gravar(novoPedido);
         }
 
 
