@@ -2,10 +2,8 @@
 using DesafioTecnicoSTi3.data.Entidades;
 using DesafioTecnicoSTi3.ViewModel;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DesafioTecnicoSTi3.Business
 {

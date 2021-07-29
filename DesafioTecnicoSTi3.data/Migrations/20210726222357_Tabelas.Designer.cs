@@ -2,14 +2,16 @@
 using DesafioTecnicoSTi3.data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DesafioTecnicoSTi3.data.Migrations
 {
     [DbContext(typeof(DesafioTecnicoSTi3Context))]
-    partial class DesafioTecnicoSTi3ContextModelSnapshot : ModelSnapshot
+    [Migration("20210726222357_Tabelas")]
+    partial class Tabelas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

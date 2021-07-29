@@ -20,11 +20,16 @@ namespace DesafioTecnicoSTi3.data.Context
 
         public virtual DbSet<Configuracoes> Configuracoes { get; set; }
         public virtual DbSet<Clientes> Clientes { get; set; }
+        public virtual DbSet<EnderecoEntrega> EnderecoEntregas { get; set; }
+        public virtual DbSet<Item> Itens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ConfigMapping());
             modelBuilder.ApplyConfiguration(new ClientesMapping());
+            modelBuilder.ApplyConfiguration(new EnderecoEntregaMapping());
+            modelBuilder.ApplyConfiguration(new ItemMapping());
+            modelBuilder.ApplyConfiguration(new PagamentoMapping());
 
             base.OnModelCreating(modelBuilder);
         }

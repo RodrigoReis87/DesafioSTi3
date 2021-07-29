@@ -2,14 +2,16 @@
 using DesafioTecnicoSTi3.data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DesafioTecnicoSTi3.data.Migrations
 {
     [DbContext(typeof(DesafioTecnicoSTi3Context))]
-    partial class DesafioTecnicoSTi3ContextModelSnapshot : ModelSnapshot
+    [Migration("20210726220935_Teste")]
+    partial class Teste
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,32 +125,6 @@ namespace DesafioTecnicoSTi3.data.Migrations
                     b.HasKey("codigo_item");
 
                     b.ToTable("Itens");
-                });
-
-            modelBuilder.Entity("DesafioTecnicoSTi3.data.Entidades.Pagamento", b =>
-                {
-                    b.Property<long>("cod_pgto")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("codigo")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("id")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("nome")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<int>("parcela")
-                        .HasColumnType("int(30)");
-
-                    b.Property<decimal>("valor")
-                        .HasColumnType("decimal(15,2)");
-
-                    b.HasKey("cod_pgto");
-
-                    b.ToTable("Pagamento");
                 });
 #pragma warning restore 612, 618
         }

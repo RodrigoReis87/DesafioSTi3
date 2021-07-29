@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DesafioTecnicoSTi3.data.Entidades
+namespace DesafioTecnicoSTi3.ViewModel
 {
-    public class Clientes
+    public class ClienteViewModel
     {
         public long codigo_cliente { get; set; }
         public string id { get; set; }
