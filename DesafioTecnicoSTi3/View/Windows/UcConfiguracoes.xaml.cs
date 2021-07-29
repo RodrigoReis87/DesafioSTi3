@@ -20,6 +20,9 @@ namespace DesafioTecnicoSTi3.View.UserControls
             DataContext = UcConfigVM;
 
             CarregarRegistro();
+
+            DesativaBotao();
+
         }
 
         private void BtnSalvar_Click(object sender, RoutedEventArgs e)
@@ -36,12 +39,13 @@ namespace DesafioTecnicoSTi3.View.UserControls
             UcConfigVM.UrlAPI = "";
 
             CarregarRegistro();
+            DesativaBotao();
         }
 
         private void BtnAtualizar_Click(object sender, RoutedEventArgs e)
         {
             var url = (sender as Button).Tag as ConfigViewModel;
-            
+
             PreencherCampos(url);
         }
 
@@ -50,11 +54,20 @@ namespace DesafioTecnicoSTi3.View.UserControls
             UcConfigVM.Id = url.Id;
             UcConfigVM.UrlAPI = url.UrlAPI;
             UcConfigVM.Alteracao = true;
+            BtnSalvar.IsEnabled = true;
         }
 
         private void CarregarRegistro()
         {
             UcConfigVM.URLAdicionada = new ObservableCollection<ConfigViewModel>(new ConfigBusiness().Listar());
+        }
+
+        private void DesativaBotao()
+        {
+            if (UcConfigVM.URLAdicionada.Count >= 1)
+            {
+                BtnSalvar.IsEnabled = false;
+            }
         }
 
         private void SalvarURL()
@@ -78,7 +91,9 @@ namespace DesafioTecnicoSTi3.View.UserControls
             new ConfigBusiness().Alterar(atualizaURL);
         }
 
-        
+
+
+
     }
 }
 
