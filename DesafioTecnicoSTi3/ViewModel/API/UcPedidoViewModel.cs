@@ -38,8 +38,8 @@ namespace DesafioTecnicoSTi3.ViewModel
             }
         }
 
-        private string _dataCriacao;
-        public string dataCriacao
+        private DateTime _dataCriacao;
+        public DateTime dataCriacao
         {
             get => _dataCriacao;
             set
@@ -71,8 +71,8 @@ namespace DesafioTecnicoSTi3.ViewModel
             }
         }
 
-        private int _desconto;
-        public int desconto
+        private double _desconto;
+        public double desconto
         {
             get => _desconto;
             set
@@ -82,8 +82,8 @@ namespace DesafioTecnicoSTi3.ViewModel
             }
         }
 
-        private int _frete;
-        public int frete
+        private double _frete;
+        public double frete
         {
             get => _frete;
             set
@@ -104,8 +104,8 @@ namespace DesafioTecnicoSTi3.ViewModel
             }
         }
 
-        private string _valortotal;
-        public string ValorTotal
+        private double _valortotal;
+        public double ValorTotal
         {
             get => _valortotal;
             set
