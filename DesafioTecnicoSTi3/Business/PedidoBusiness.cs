@@ -22,13 +22,13 @@ namespace DesafioTecnicoSTi3.Business
             {
                 id = pedidoViewModel.id,
                 numero = pedidoViewModel.numero,
+                dataCriacao = pedidoViewModel.dataCriacao,
                 dataAlteracao = pedidoViewModel.dataAlteracao,
                 dataCriacao = pedidoViewModel.dataCriacao,
                 status = pedidoViewModel.status,
                 desconto = pedidoViewModel.desconto,
+                frete = pedidoViewModel.frete,
                 subTotal = pedidoViewModel.subTotal,
-                valorTotal = pedidoViewModel.valorTotal
-
             });
 
             _context.SaveChanges();

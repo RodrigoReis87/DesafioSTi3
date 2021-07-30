@@ -107,6 +107,9 @@ namespace DesafioTecnicoSTi3.data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("Pedidocod_pedido")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("id")
                         .HasColumnType("varchar(100)");
 
