@@ -19,32 +19,32 @@ namespace DesafioTecnicoSTi3.data.Migrations
 
             modelBuilder.Entity("DesafioTecnicoSTi3.data.Entidades.Clientes", b =>
                 {
-                    b.Property<string>("id")
-                        .HasColumnType("varchar(767)");
-
-                    b.Property<string>("cnpj")
-                        .HasColumnType("varchar(100)");
-
                     b.Property<long>("codigo_cliente")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    b.Property<string>("cpf")
-                        .HasColumnType("varchar(100)");
+                    b.Property<string>("cnpj")
+                        .HasColumnType("text");
 
-                    b.Property<string>("dataNascimento")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
+                    b.Property<string>("cpf")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("dataNascimento")
+                        .HasColumnType("datetime");
 
                     b.Property<string>("email")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
+
+                    b.Property<string>("id")
+                        .HasColumnType("text");
 
                     b.Property<string>("nome")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("razaoSocial")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
 
-                    b.HasKey("id");
+                    b.HasKey("codigo_cliente");
 
                     b.ToTable("Clientes");
                 });
@@ -70,31 +70,31 @@ namespace DesafioTecnicoSTi3.data.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("bairro")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("cep")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("cidade")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("complemento")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("endereco")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("estado")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("id")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("numero")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("referencia")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
 
                     b.HasKey("codigo");
 
@@ -107,32 +107,30 @@ namespace DesafioTecnicoSTi3.data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("Pedidocod_pedido")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("id")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
 
-                    b.Property<long>("idPedido")
-                        .HasColumnType("bigint");
+                    b.Property<string>("idPedido")
+                        .HasColumnType("text");
 
                     b.Property<string>("idProduto")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("nome")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
 
-                    b.Property<string>("quantidade")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
+                    b.Property<long?>("pedidocod_pedido")
+                        .HasColumnType("bigint");
 
-                    b.Property<decimal>("valorUnitario")
-                        .HasColumnType("decimal(15,2)");
+                    b.Property<int>("quantidade")
+                        .HasColumnType("int");
+
+                    b.Property<double>("valorUnitario")
+                        .HasColumnType("double");
 
                     b.HasKey("codigo_item");
 
-                    b.HasIndex("idPedido");
+                    b.HasIndex("pedidocod_pedido");
 
                     b.ToTable("Itens");
                 });
@@ -147,23 +145,26 @@ namespace DesafioTecnicoSTi3.data.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("codigo")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("id")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("nome")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
 
                     b.Property<int>("parcela")
-                        .HasColumnType("int(30)");
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("valor")
-                        .HasColumnType("decimal(15,2)");
+                    b.Property<long?>("pedidocod_pedido")
+                        .HasColumnType("bigint");
+
+                    b.Property<double>("valor")
+                        .HasColumnType("double");
 
                     b.HasKey("cod_pgto");
 
-                    b.HasIndex("IdPedido");
+                    b.HasIndex("pedidocod_pedido");
 
                     b.ToTable("Pagamento");
                 });
@@ -174,8 +175,8 @@ namespace DesafioTecnicoSTi3.data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    b.Property<string>("clienteid")
-                        .HasColumnType("varchar(767)");
+                    b.Property<long?>("clientecodigo_cliente")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("dataAlteracao")
                         .HasColumnType("datetime");
@@ -193,14 +194,13 @@ namespace DesafioTecnicoSTi3.data.Migrations
                         .HasColumnType("double");
 
                     b.Property<string>("id")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("numero")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("status")
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("text");
 
                     b.Property<double>("subTotal")
                         .HasColumnType("double");
@@ -210,7 +210,7 @@ namespace DesafioTecnicoSTi3.data.Migrations
 
                     b.HasKey("cod_pedido");
 
-                    b.HasIndex("clienteid");
+                    b.HasIndex("clientecodigo_cliente");
 
                     b.HasIndex("enderecoEntregacodigo");
 
@@ -221,9 +221,7 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 {
                     b.HasOne("DesafioTecnicoSTi3.data.Entidades.Pedido", "pedido")
                         .WithMany("itens")
-                        .HasForeignKey("idPedido")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("pedidocod_pedido");
 
                     b.Navigation("pedido");
                 });
@@ -232,9 +230,7 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 {
                     b.HasOne("DesafioTecnicoSTi3.data.Entidades.Pedido", "pedido")
                         .WithMany("pagamento")
-                        .HasForeignKey("IdPedido")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("pedidocod_pedido");
 
                     b.Navigation("pedido");
                 });
@@ -243,7 +239,7 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 {
                     b.HasOne("DesafioTecnicoSTi3.data.Entidades.Clientes", "cliente")
                         .WithMany()
-                        .HasForeignKey("clienteid");
+                        .HasForeignKey("clientecodigo_cliente");
 
                     b.HasOne("DesafioTecnicoSTi3.data.Entidades.EnderecoEntrega", "enderecoEntrega")
                         .WithMany()
