@@ -16,6 +16,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
                     <RowDefinition />
+                    <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
 
                 <Grid>
@@ -23,21 +24,7 @@
                         <ColumnDefinition Width="7*"/>
                         <ColumnDefinition Width="13*"/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
-                        <TextBox Height="25" Width="460" Margin="10,0,10,0" Style="{StaticResource EstiloTB}"/>
-                        
-                        <Button x:Name="BtnConsultar" Content="Consultar" Foreground="WhiteSmoke" FontFamily="Rockwell" 
-                                Background="#FF4000"
-                                Height="25" Width="100" Margin="0,0,10,0" Tag="{Binding}"
-                                Style="{StaticResource BtnPrincipal}" Click="BtnConsultar_Click">
-                        </Button>
-
-                        <Button x:Name="BtnAlgumaCoisa" Content="Não entendi" Foreground="WhiteSmoke" FontFamily="Rockwell" 
-                                Background="#FF4000"
-                                Height="25" Width="100" Margin="0,0,10,0" Tag="{Binding}"
-                                Style="{StaticResource BtnPrincipal}" Click="BtnAlgumaCoisa_Click">
-                        </Button>
-                    </StackPanel>
+                    <Label Content="Desafio STi3" FontSize="30" Foreground="WhiteSmoke"/>
                 </Grid>
 
                 <Grid Grid.Row="1">
@@ -60,12 +47,21 @@
                         </DataGrid.Effect>
                     </DataGrid>
                 </Grid>
+
+                <Grid Grid.Row="2">
+                    <Button x:Name="BtnSincronizar" Content="Sincronizar" Foreground="WhiteSmoke" FontFamily="Rockwell" 
+                                Background="#FF4000" HorizontalAlignment="Right"
+                                Height="25" Width="100" Margin="0,0,10,0" Tag="{Binding}"
+                                Style="{StaticResource BtnPrincipal}" Click="BtnSincronizar_Click">
+                    </Button>
+                </Grid>
             </Grid>
 
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
 
                 <Button x:Name="BtnConfig" Content="Configurações" Foreground="WhiteSmoke" FontFamily="Rockwell" 

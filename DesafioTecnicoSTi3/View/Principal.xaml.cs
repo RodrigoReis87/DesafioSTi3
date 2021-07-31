@@ -43,17 +43,12 @@ namespace DesafioTecnicoSTi3.View
             context.AplicarMigracoes();
         }
 
-        private void BtnConsultar_Click(object sender, RoutedEventArgs e)
+        private void BtnSincronizar_Click(object sender, RoutedEventArgs e)
         {
             SincronizarPedidos();
         }
 
-        private void BtnAlgumaCoisa_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void BtnConfig_Click(object sender, RoutedEventArgs e)
+    private void BtnConfig_Click(object sender, RoutedEventArgs e)
         {
             UcConfiguracoes Conteudo = new UcConfiguracoes();
             Conteudo.ShowDialog();
@@ -174,6 +169,6 @@ namespace DesafioTecnicoSTi3.View
             new EnderecoBusiness().Gravar(Endereco);
         }
 
-
     }
+
 }
