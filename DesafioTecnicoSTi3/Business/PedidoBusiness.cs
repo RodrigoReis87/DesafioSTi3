@@ -1,9 +1,7 @@
 ﻿using DesafioTecnicoSTi3.data.Context;
 using DesafioTecnicoSTi3.data.Entidades;
 using DesafioTecnicoSTi3.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace DesafioTecnicoSTi3.Business
 {
@@ -24,11 +22,11 @@ namespace DesafioTecnicoSTi3.Business
                 numero = pedidoViewModel.numero,
                 dataCriacao = pedidoViewModel.dataCriacao,
                 dataAlteracao = pedidoViewModel.dataAlteracao,
-                dataCriacao = pedidoViewModel.dataCriacao,
                 status = pedidoViewModel.status,
                 desconto = pedidoViewModel.desconto,
                 frete = pedidoViewModel.frete,
                 subTotal = pedidoViewModel.subTotal,
+                valorTotal = pedidoViewModel.valorTotal
             });
 
             _context.SaveChanges();
