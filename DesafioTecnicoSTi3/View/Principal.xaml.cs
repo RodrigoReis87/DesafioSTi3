@@ -7,6 +7,7 @@ using DesafioTecnicoSTi3.ViewModel.API;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Windows;
 
@@ -30,10 +31,8 @@ namespace DesafioTecnicoSTi3.View
             AplicarMigracoes();
 
             DataContext = UcPedidoVM;
-            DataContext = UcClienteVM;
-            DataContext = UcItemVM;
-            DataContext = UcEnderecoVM;
-            DataContext = UcPagamentoVM;
+
+            CarregarRegistros();
 
         }
 
@@ -72,7 +71,7 @@ namespace DesafioTecnicoSTi3.View
                 var obj = JsonConvert.DeserializeObject<List<Pedido>>(pedidoCompleto);
 
                 foreach (var item in obj)
-                {
+                {                    
                     //Pedido
                     UcPedidoVM.id = item.id;
                     UcPedidoVM.numero = item.numero;
@@ -110,6 +109,8 @@ namespace DesafioTecnicoSTi3.View
                     GravarEndereço();
 
                     GravarPedido();
+
+                    CarregarRegistros();
 
                 }
 
@@ -169,6 +170,10 @@ namespace DesafioTecnicoSTi3.View
             new EnderecoBusiness().Gravar(Endereco);
         }
 
+        private void CarregarRegistros()
+        {
+            UcPedidoVM.PedidosAdicionados = new ObservableCollection<PedidoViewModel>(new PedidoBusiness().Listar());
+        }
     }
 
 }

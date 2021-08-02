@@ -1,6 +1,8 @@
 ﻿using DesafioTecnicoSTi3.data.Context;
 using DesafioTecnicoSTi3.data.Entidades;
 using DesafioTecnicoSTi3.ViewModel;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DesafioTecnicoSTi3.Business
@@ -30,6 +32,24 @@ namespace DesafioTecnicoSTi3.Business
             });
 
             _context.SaveChanges();
+        }
+
+        public List<PedidoViewModel> Listar()
+        {
+            return _context.Pedidos.AsNoTracking()
+                .Select(p => new PedidoViewModel
+                {
+                    id = p.id,
+                    numero = p.numero,
+                    dataAlteracao = p.dataAlteracao,
+                    dataCriacao = p.dataCriacao,
+                    desconto = p.desconto,
+                    frete = p.frete,
+                    status = p.status,
+                    subTotal = p.subTotal,
+                    valorTotal = p.valorTotal
+
+                }).ToList();
         }
     }
 }
