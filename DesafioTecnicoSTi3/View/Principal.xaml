@@ -30,16 +30,16 @@
                 <Grid Grid.Row="1">
 
                     <DataGrid Name="DtPedidos" AutoGenerateColumns="False"
-                              CanUserReorderColumns="False" CanUserResizeColumns="True" CanUserSortColumns="True"
+                              CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False"
                               Background="LightGray" Margin="10" ColumnHeaderStyle="{StaticResource DgHeaderPrincipal}" 
                               ItemsSource="{Binding PedidosAdicionados}">
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="60" Binding="{Binding Numero}" Header="NUMERO"/>
-                            <DataGridTextColumn Width="70" Binding="{Binding Data}" Header="DATA"/>
-                            <DataGridTextColumn Width="390" Binding="{Binding Cliente}" Header="CLIENTE"/>
-                            <DataGridTextColumn Width="70" Binding="{Binding Status}" Header="STATUS"/>
-                            <DataGridTextColumn Width="*" Binding="{Binding ValorTotal}" Header="VALOR TOTAL"/>
+                            <DataGridTextColumn Width="70" Binding="{Binding numero}" Header="NUMERO"/>
+                            <DataGridTextColumn Width="110" Binding="{Binding dataCriacao, StringFormat={}{0:dd/MM/yyyy}}" Header="DATA"/>
+                            <DataGridTextColumn Width="300" Binding="{Binding Clientes}" Header="CLIENTE"/>
+                            <DataGridTextColumn Width="80" Binding="{Binding status}" Header="STATUS"/>
+                            <DataGridTextColumn Width="*" Binding="{Binding valorTotal, ConverterCulture=pt-BR,StringFormat=#\,##0.00}" Header="VALOR TOTAL"/>
                         </DataGrid.Columns>
 
                         <DataGrid.Effect>
@@ -70,7 +70,7 @@
                                 Style="{StaticResource BtnPrincipal}" Click="BtnConfig_Click">
                 </Button>
 
-                <DataGrid Grid.Row="1" Background="LightGray" Margin="10">
+                <DataGrid Name="DtDetalhes" Grid.Row="1" Background="LightGray" Margin="10">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="*" Binding="{Binding}" 
                                             Header="Detalhes do Pedido" HeaderStyle="{StaticResource DgHeader}">
