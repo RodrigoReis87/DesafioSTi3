@@ -16,18 +16,24 @@ namespace DesafioTecnicoSTi3.Business
             _context = new DesafioTecnicoSTi3Context();
         }
 
-        public void Gravar(ClienteViewModel clienteViewModel)
+        public void Inserir(ClienteViewModel clienteViewModel)
         {
-            _context.Clientes.Add(new Clientes
+            var cliente = _context.Clientes.FirstOrDefault(x => x.cpf == clienteViewModel.cpf);
+
+            if (cliente == null)
             {
-                id = clienteViewModel.id,
-                cnpj = clienteViewModel.cnpj,
-                cpf = clienteViewModel.cpf,
-                nome = clienteViewModel.nome,
-                razaoSocial = clienteViewModel.razaoSocial,
-                email = clienteViewModel.email,
-                dataNascimento = clienteViewModel.dataNascimento
-            });
+                 cliente = new Clientes();
+                _context.Clientes.Add(cliente);
+            }
+
+            cliente.id = clienteViewModel.id;
+            cliente.cnpj = clienteViewModel.cnpj;
+            cliente.cpf = clienteViewModel.cpf;
+            cliente.nome = clienteViewModel.nome;
+            cliente.razaoSocial = clienteViewModel.razaoSocial;
+            cliente.email = clienteViewModel.email;
+            cliente.dataNascimento = clienteViewModel.dataNascimento;               
+            
 
             _context.SaveChanges();
         }

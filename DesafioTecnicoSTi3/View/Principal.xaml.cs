@@ -82,6 +82,7 @@ namespace DesafioTecnicoSTi3.View
                     UcPedidoVM.desconto = item.desconto;
                     UcPedidoVM.subTotal = item.subTotal;
                     UcPedidoVM.ValorTotal = item.valorTotal;
+                    //UcPedidoVM.cliente = new Clientes { item.cliente.codigo_cliente}
 
                     //Cliente
                     UcClienteVM.id = item.cliente.id;
@@ -133,7 +134,7 @@ namespace DesafioTecnicoSTi3.View
                 subTotal = UcPedidoVM.subTotal,
                 valorTotal = UcPedidoVM.ValorTotal
             };
-            new PedidoBusiness().Gravar(novoPedido);
+            new PedidoBusiness().Inserir(novoPedido);
         }
 
         private void GravarCliente()
@@ -149,7 +150,7 @@ namespace DesafioTecnicoSTi3.View
                 email = UcClienteVM.email,
                 dataNascimento = UcClienteVM.datadeNascimento
             };
-            new ClienteBusiness().Gravar(novoCliente);
+            new ClienteBusiness().Inserir(novoCliente);
         }
 
         private void GravarEndereço()
@@ -167,7 +168,7 @@ namespace DesafioTecnicoSTi3.View
                 complemento = UcEnderecoVM.complemento,
                 referencia = UcEnderecoVM.referencia
             };
-            new EnderecoBusiness().Gravar(Endereco);
+            new EnderecoBusiness().Inserir(Endereco);
         }
 
         private void CarregarRegistros()

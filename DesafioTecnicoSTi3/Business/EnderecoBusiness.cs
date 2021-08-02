@@ -1,6 +1,7 @@
 ﻿using DesafioTecnicoSTi3.data.Context;
 using DesafioTecnicoSTi3.data.Entidades;
 using DesafioTecnicoSTi3.ViewModel;
+using System.Linq;
 
 namespace DesafioTecnicoSTi3.Business
 {
@@ -13,20 +14,26 @@ namespace DesafioTecnicoSTi3.Business
             _context = new DesafioTecnicoSTi3Context();
         }
 
-        public void Gravar(EnderecoEntregaViewModel enderecoViewModel)
+        public void Inserir(EnderecoEntregaViewModel enderecoViewModel)
         {
-            _context.EnderecoEntregas.Add(new EnderecoEntrega
+            var endereco = _context.EnderecoEntregas.FirstOrDefault(x => x.id == enderecoViewModel.id);
+
+            if(endereco == null)
             {
-                id = enderecoViewModel.id,
-                endereco = enderecoViewModel.endereco,
-                numero = enderecoViewModel.numero,
-                cep = enderecoViewModel.cep,
-                bairro = enderecoViewModel.bairro,
-                cidade = enderecoViewModel.cidade,
-                estado = enderecoViewModel.estado,
-                complemento = enderecoViewModel.complemento,
-                referencia = enderecoViewModel.referencia
-            });
+                endereco = new EnderecoEntrega();
+                _context.EnderecoEntregas.Add(endereco);
+            }
+
+                endereco.id = enderecoViewModel.id;
+                endereco.endereco = enderecoViewModel.endereco;
+                endereco.numero = enderecoViewModel.numero;
+                endereco.cep = enderecoViewModel.cep;
+                endereco.bairro = enderecoViewModel.bairro;
+                endereco.cidade = enderecoViewModel.cidade;
+                endereco.estado = enderecoViewModel.estado;
+                endereco.complemento = enderecoViewModel.complemento;
+                endereco.referencia = enderecoViewModel.referencia;
+            
 
             _context.SaveChanges();
         }
