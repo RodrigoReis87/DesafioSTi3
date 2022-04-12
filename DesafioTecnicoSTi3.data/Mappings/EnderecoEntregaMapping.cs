@@ -9,7 +9,7 @@ namespace DesafioTecnicoSTi3.data.Mappings
         public void Configure(EntityTypeBuilder<EnderecoEntrega> builder)
         {
             builder.HasKey(p => p.codigo);
-            builder.Property(p => p.id).HasColumnType("varchar(20)");
+            builder.Property(p => p.id).HasColumnType("varchar(50)");
             builder.Property(p => p.endereco).HasColumnType("varchar(150)");
             builder.Property(p => p.numero).HasColumnType("varchar(20)");
             builder.Property(p => p.cep).HasColumnType("varchar(15)");

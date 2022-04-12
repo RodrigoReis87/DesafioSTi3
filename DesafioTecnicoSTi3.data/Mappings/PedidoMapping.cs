@@ -20,8 +20,8 @@ namespace DesafioTecnicoSTi3.data.Mappings
             builder.Property(p => p.subTotal).HasColumnType("double(6,2)");
             builder.Property(p => p.valorTotal).HasColumnType("double(6,2)");
             builder.HasOne(p => p.cliente).WithMany(x=>x.pedido).HasConstraintName("FK_Pedido_Cliente").OnDelete(DeleteBehavior.NoAction);
-            builder.HasMany(p => p.itens).WithMany(x => x.pedido);
-            builder.HasMany(p => p.pagamento);
+            //builder.HasMany(p => p.itens).WithMany(x => x.pedido);
+            //builder.HasMany(p => p.pagamento);
         }
     }
 }

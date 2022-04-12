@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DesafioTecnicoSTi3.data.Migrations
 {
     [DbContext(typeof(DesafioTecnicoSTi3Context))]
-    [Migration("20220412210653_Teste")]
+    [Migration("20220412212739_Teste")]
     partial class Teste
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,7 +86,7 @@ namespace DesafioTecnicoSTi3.data.Migrations
                         .HasColumnType("varchar(30)");
 
                     b.Property<string>("id")
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("numero")
                         .HasColumnType("varchar(20)");
@@ -117,9 +117,6 @@ namespace DesafioTecnicoSTi3.data.Migrations
                     b.Property<string>("nome")
                         .HasColumnType("text");
 
-                    b.Property<long?>("pedidocod_pedido")
-                        .HasColumnType("bigint");
-
                     b.Property<int>("quantidade")
                         .HasColumnType("int");
 
@@ -127,8 +124,6 @@ namespace DesafioTecnicoSTi3.data.Migrations
                         .HasColumnType("double");
 
                     b.HasKey("codigo_item");
-
-                    b.HasIndex("pedidocod_pedido");
 
                     b.ToTable("Itens");
                 });
@@ -215,13 +210,19 @@ namespace DesafioTecnicoSTi3.data.Migrations
                     b.ToTable("Pedidos");
                 });
 
-            modelBuilder.Entity("DesafioTecnicoSTi3.data.Entidades.Item", b =>
+            modelBuilder.Entity("ItemPedido", b =>
                 {
-                    b.HasOne("DesafioTecnicoSTi3.data.Entidades.Pedido", "pedido")
-                        .WithMany("itens")
-                        .HasForeignKey("pedidocod_pedido");
+                    b.Property<long>("itenscodigo_item")
+                        .HasColumnType("bigint");
 
-                    b.Navigation("pedido");
+                    b.Property<long>("pedidocod_pedido")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("itenscodigo_item", "pedidocod_pedido");
+
+                    b.HasIndex("pedidocod_pedido");
+
+                    b.ToTable("ItemPedido");
                 });
 
             modelBuilder.Entity("DesafioTecnicoSTi3.data.Entidades.Pagamento", b =>
@@ -237,7 +238,9 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 {
                     b.HasOne("DesafioTecnicoSTi3.data.Entidades.Clientes", "cliente")
                         .WithMany("pedido")
-                        .HasForeignKey("clienteid");
+                        .HasForeignKey("clienteid")
+                        .HasConstraintName("FK_Pedido_Cliente")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("DesafioTecnicoSTi3.data.Entidades.EnderecoEntrega", "enderecoEntrega")
                         .WithMany()
@@ -248,6 +251,21 @@ namespace DesafioTecnicoSTi3.data.Migrations
                     b.Navigation("enderecoEntrega");
                 });
 
+            modelBuilder.Entity("ItemPedido", b =>
+                {
+                    b.HasOne("DesafioTecnicoSTi3.data.Entidades.Item", null)
+                        .WithMany()
+                        .HasForeignKey("itenscodigo_item")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DesafioTecnicoSTi3.data.Entidades.Pedido", null)
+                        .WithMany()
+                        .HasForeignKey("pedidocod_pedido")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("DesafioTecnicoSTi3.data.Entidades.Clientes", b =>
                 {
                     b.Navigation("pedido");
@@ -255,8 +273,6 @@ namespace DesafioTecnicoSTi3.data.Migrations
 
             modelBuilder.Entity("DesafioTecnicoSTi3.data.Entidades.Pedido", b =>
                 {
-                    b.Navigation("itens");
-
                     b.Navigation("pagamento");
                 });
 #pragma warning restore 612, 618

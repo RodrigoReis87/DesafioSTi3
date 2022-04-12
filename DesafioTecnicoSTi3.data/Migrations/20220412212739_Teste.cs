@@ -44,7 +44,7 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 {
                     codigo = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    id = table.Column<string>(type: "varchar(20)", nullable: true),
+                    id = table.Column<string>(type: "varchar(50)", nullable: true),
                     endereco = table.Column<string>(type: "varchar(150)", nullable: true),
                     numero = table.Column<string>(type: "varchar(20)", nullable: true),
                     cep = table.Column<string>(type: "varchar(15)", nullable: true),
@@ -57,6 +57,24 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EnderecoEntregas", x => x.codigo);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Itens",
+                columns: table => new
+                {
+                    codigo_item = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    id = table.Column<string>(type: "text", nullable: true),
+                    idProduto = table.Column<string>(type: "text", nullable: true),
+                    idPedido = table.Column<string>(type: "text", nullable: true),
+                    nome = table.Column<string>(type: "text", nullable: true),
+                    quantidade = table.Column<int>(type: "int", nullable: false),
+                    valorUnitario = table.Column<double>(type: "double", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Itens", x => x.codigo_item);
                 });
 
             migrationBuilder.CreateTable(
@@ -81,11 +99,10 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 {
                     table.PrimaryKey("PK_Pedidos", x => x.cod_pedido);
                     table.ForeignKey(
-                        name: "FK_Pedidos_Clientes_clienteid",
+                        name: "FK_Pedido_Cliente",
                         column: x => x.clienteid,
                         principalTable: "Clientes",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "FK_Pedidos_EnderecoEntregas_enderecoEntregacodigo",
                         column: x => x.enderecoEntregacodigo,
@@ -95,28 +112,27 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Itens",
+                name: "ItemPedido",
                 columns: table => new
                 {
-                    codigo_item = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    id = table.Column<string>(type: "text", nullable: true),
-                    idProduto = table.Column<string>(type: "text", nullable: true),
-                    idPedido = table.Column<string>(type: "text", nullable: true),
-                    nome = table.Column<string>(type: "text", nullable: true),
-                    quantidade = table.Column<int>(type: "int", nullable: false),
-                    valorUnitario = table.Column<double>(type: "double", nullable: false),
-                    pedidocod_pedido = table.Column<long>(type: "bigint", nullable: true)
+                    itenscodigo_item = table.Column<long>(type: "bigint", nullable: false),
+                    pedidocod_pedido = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Itens", x => x.codigo_item);
+                    table.PrimaryKey("PK_ItemPedido", x => new { x.itenscodigo_item, x.pedidocod_pedido });
                     table.ForeignKey(
-                        name: "FK_Itens_Pedidos_pedidocod_pedido",
+                        name: "FK_ItemPedido_Itens_itenscodigo_item",
+                        column: x => x.itenscodigo_item,
+                        principalTable: "Itens",
+                        principalColumn: "codigo_item",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ItemPedido_Pedidos_pedidocod_pedido",
                         column: x => x.pedidocod_pedido,
                         principalTable: "Pedidos",
                         principalColumn: "cod_pedido",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -145,8 +161,8 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Itens_pedidocod_pedido",
-                table: "Itens",
+                name: "IX_ItemPedido_pedidocod_pedido",
+                table: "ItemPedido",
                 column: "pedidocod_pedido");
 
             migrationBuilder.CreateIndex(
@@ -171,10 +187,13 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 name: "Configuracoes");
 
             migrationBuilder.DropTable(
-                name: "Itens");
+                name: "ItemPedido");
 
             migrationBuilder.DropTable(
                 name: "Pagamento");
+
+            migrationBuilder.DropTable(
+                name: "Itens");
 
             migrationBuilder.DropTable(
                 name: "Pedidos");
