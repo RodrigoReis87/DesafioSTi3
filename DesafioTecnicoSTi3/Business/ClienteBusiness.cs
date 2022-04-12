@@ -14,36 +14,13 @@ namespace DesafioTecnicoSTi3.Business
         public ClienteBusiness()
         {
             _context = new DesafioTecnicoSTi3Context();
-        }
-
-        public void Inserir(ClienteViewModel clienteViewModel)
-        {
-            var cliente = _context.Clientes.FirstOrDefault(x => x.cpf == clienteViewModel.cpf);
-
-            if (cliente == null)
-            {
-                 cliente = new Clientes();
-                _context.Clientes.Add(cliente);
-            }
-
-            cliente.id = clienteViewModel.id;
-            cliente.cnpj = clienteViewModel.cnpj;
-            cliente.cpf = clienteViewModel.cpf;
-            cliente.nome = clienteViewModel.nome;
-            cliente.razaoSocial = clienteViewModel.razaoSocial;
-            cliente.email = clienteViewModel.email;
-            cliente.dataNascimento = clienteViewModel.dataNascimento;               
-            
-
-            _context.SaveChanges();
-        }
+        }        
 
         public List<ClienteViewModel> Listar()
         {
             return _context.Clientes.AsNoTracking()
                 .Select(s => new ClienteViewModel
                 {
-                    codigo_cliente = s.codigo_cliente,
                     id = s.id,
                     cnpj = s.cnpj,
                     cpf = s.cpf,

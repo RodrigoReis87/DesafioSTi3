@@ -1,4 +1,6 @@
-﻿namespace DesafioTecnicoSTi3.data.Entidades
+﻿using System.Collections.Generic;
+
+namespace DesafioTecnicoSTi3.data.Entidades
 {
     public class Item
     {
@@ -9,6 +11,6 @@
         public string nome { get; set; }
         public int quantidade { get; set; }
         public double valorUnitario { get; set; }
-        public Pedido pedido { get; set; }
+        public List<Pedido> pedido { get; set; }
     }
 }

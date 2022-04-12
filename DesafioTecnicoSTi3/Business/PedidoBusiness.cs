@@ -36,7 +36,48 @@ namespace DesafioTecnicoSTi3.Business
             pedido.subTotal = pedidoViewModel.subTotal;
             pedido.valorTotal = pedidoViewModel.valorTotal;
 
+            var cliente = _context.Clientes.FirstOrDefault(x => x.id == pedidoViewModel.clientes.id);            
 
+            if (cliente != null)
+            {
+                pedido.cliente = cliente;
+            }
+            else
+            {
+                pedido.cliente = new Clientes();
+                _context.Clientes.Add(pedido.cliente);
+
+                pedido.cliente.id = pedidoViewModel.clientes.id;
+                pedido.cliente.cnpj = pedidoViewModel.clientes.cnpj;
+                pedido.cliente.cpf = pedidoViewModel.clientes.cpf;
+                pedido.cliente.nome = pedidoViewModel.clientes.nome;
+                pedido.cliente.razaoSocial = pedidoViewModel.clientes.razaoSocial;
+                pedido.cliente.email = pedidoViewModel.clientes.email;
+                pedido.cliente.dataNascimento = pedidoViewModel.clientes.dataNascimento;
+            }
+
+            var endereco = _context.EnderecoEntregas.FirstOrDefault(x => x.id == pedidoViewModel.enderecoEntrega.id);
+
+            if(endereco != null)
+            {
+                pedido.enderecoEntrega = endereco;
+            }
+            else
+            {
+                pedido.enderecoEntrega = new EnderecoEntrega();
+                _context.EnderecoEntregas.Add(pedido.enderecoEntrega);
+
+                pedido.enderecoEntrega.id = pedidoViewModel.enderecoEntrega.id;
+                pedido.enderecoEntrega.bairro = pedidoViewModel.enderecoEntrega.bairro;
+                pedido.enderecoEntrega.cidade = pedidoViewModel.enderecoEntrega.cidade;
+                pedido.enderecoEntrega.endereco = pedidoViewModel.enderecoEntrega.endereco;
+                pedido.enderecoEntrega.numero = pedido.enderecoEntrega.numero;
+                pedido.enderecoEntrega.referencia = pedidoViewModel.enderecoEntrega.referencia;
+                pedido.enderecoEntrega.cep = pedidoViewModel.enderecoEntrega.cep;
+                pedido.enderecoEntrega.complemento = pedidoViewModel.enderecoEntrega.complemento;
+                pedido.enderecoEntrega.estado = pedidoViewModel.enderecoEntrega.estado;
+
+            }
             _context.SaveChanges();
         }       
 
@@ -53,9 +94,11 @@ namespace DesafioTecnicoSTi3.Business
                     frete = p.frete,
                     status = p.status,
                     subTotal = p.subTotal,
-                    valorTotal = p.valorTotal
+                    valorTotal = p.valorTotal, 
+                    clientes = p.cliente,
+                })
+                .ToList();
 
-                }).ToList();
         }
     }
 }

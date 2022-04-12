@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DesafioTecnicoSTi3.data.Migrations
 {
     [DbContext(typeof(DesafioTecnicoSTi3Context))]
-    [Migration("20210730143012_Inicio")]
-    partial class Inicio
+    [Migration("20220412210653_Teste")]
+    partial class Teste
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,32 +21,28 @@ namespace DesafioTecnicoSTi3.data.Migrations
 
             modelBuilder.Entity("DesafioTecnicoSTi3.data.Entidades.Clientes", b =>
                 {
-                    b.Property<long>("codigo_cliente")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                    b.Property<string>("id")
+                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("cnpj")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar (20)");
 
                     b.Property<string>("cpf")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar (20)");
 
                     b.Property<DateTime>("dataNascimento")
                         .HasColumnType("datetime");
 
                     b.Property<string>("email")
-                        .HasColumnType("text");
-
-                    b.Property<string>("id")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar (70)");
 
                     b.Property<string>("nome")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar (100)");
 
                     b.Property<string>("razaoSocial")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar (100)");
 
-                    b.HasKey("codigo_cliente");
+                    b.HasKey("id");
 
                     b.ToTable("Clientes");
                 });
@@ -72,31 +68,31 @@ namespace DesafioTecnicoSTi3.data.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("bairro")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("cep")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(15)");
 
                     b.Property<string>("cidade")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(70)");
 
                     b.Property<string>("complemento")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("endereco")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("estado")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(30)");
 
                     b.Property<string>("id")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("numero")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("referencia")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(150)");
 
                     b.HasKey("codigo");
 
@@ -177,8 +173,8 @@ namespace DesafioTecnicoSTi3.data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("clientecodigo_cliente")
-                        .HasColumnType("bigint");
+                    b.Property<string>("clienteid")
+                        .HasColumnType("varchar(200)");
 
                     b.Property<DateTime>("dataAlteracao")
                         .HasColumnType("datetime");
@@ -187,32 +183,32 @@ namespace DesafioTecnicoSTi3.data.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<double>("desconto")
-                        .HasColumnType("double");
+                        .HasColumnType("double(6,2)");
 
                     b.Property<long?>("enderecoEntregacodigo")
                         .HasColumnType("bigint");
 
                     b.Property<double>("frete")
-                        .HasColumnType("double");
+                        .HasColumnType("double(6,2)");
 
                     b.Property<string>("id")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("numero")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(30)");
 
                     b.Property<string>("status")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(30)");
 
                     b.Property<double>("subTotal")
-                        .HasColumnType("double");
+                        .HasColumnType("double(6,2)");
 
                     b.Property<double>("valorTotal")
-                        .HasColumnType("double");
+                        .HasColumnType("double(6,2)");
 
                     b.HasKey("cod_pedido");
 
-                    b.HasIndex("clientecodigo_cliente");
+                    b.HasIndex("clienteid");
 
                     b.HasIndex("enderecoEntregacodigo");
 
@@ -240,8 +236,8 @@ namespace DesafioTecnicoSTi3.data.Migrations
             modelBuilder.Entity("DesafioTecnicoSTi3.data.Entidades.Pedido", b =>
                 {
                     b.HasOne("DesafioTecnicoSTi3.data.Entidades.Clientes", "cliente")
-                        .WithMany()
-                        .HasForeignKey("clientecodigo_cliente");
+                        .WithMany("pedido")
+                        .HasForeignKey("clienteid");
 
                     b.HasOne("DesafioTecnicoSTi3.data.Entidades.EnderecoEntrega", "enderecoEntrega")
                         .WithMany()
@@ -250,6 +246,11 @@ namespace DesafioTecnicoSTi3.data.Migrations
                     b.Navigation("cliente");
 
                     b.Navigation("enderecoEntrega");
+                });
+
+            modelBuilder.Entity("DesafioTecnicoSTi3.data.Entidades.Clientes", b =>
+                {
+                    b.Navigation("pedido");
                 });
 
             modelBuilder.Entity("DesafioTecnicoSTi3.data.Entidades.Pedido", b =>

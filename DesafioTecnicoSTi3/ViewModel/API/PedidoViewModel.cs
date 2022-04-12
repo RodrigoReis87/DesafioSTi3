@@ -16,7 +16,7 @@ namespace DesafioTecnicoSTi3.ViewModel
         public double frete { get; set; }
         public double subTotal { get; set; }
         public double valorTotal { get; set; }
-        public Clientes Clientes { get; set; }
+        public Clientes clientes { get; set; }
         public EnderecoEntrega enderecoEntrega { get; set; }
         public List<ItemViewModel> itens { get; set; }
         public List<PagamentoViewModel> pagamento { get; set; }

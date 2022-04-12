@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DesafioTecnicoSTi3.View"
+        xmlns:local="clr-namespace:DesafioTecnicoSTi3.View" xmlns:viewmodel="clr-namespace:DesafioTecnicoSTi3.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:PropertyChange}"
         mc:Ignorable="d"
         Title="Desafio STi3" Height="600" Width="1024" WindowStartupLocation="CenterScreen" WindowState="Normal">
     <Grid Background="#100040">
@@ -35,11 +35,11 @@
                               ItemsSource="{Binding PedidosAdicionados}">
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="70" Binding="{Binding numero}" Header="NUMERO"/>
-                            <DataGridTextColumn Width="110" Binding="{Binding dataCriacao, StringFormat={}{0:dd/MM/yyyy}}" Header="DATA"/>
-                            <DataGridTextColumn Width="300" Binding="{Binding Clientes}" Header="CLIENTE"/>
-                            <DataGridTextColumn Width="80" Binding="{Binding status}" Header="STATUS"/>
-                            <DataGridTextColumn Width="*" Binding="{Binding valorTotal, ConverterCulture=pt-BR,StringFormat=#\,##0.00}" Header="VALOR TOTAL"/>
+                            <DataGridTextColumn Width="70" Binding="{Binding numero}" Header="NUMERO" IsReadOnly="True"/>
+                            <DataGridTextColumn Width="110" Binding="{Binding dataCriacao, StringFormat={}{0:dd/MM/yyyy}}" Header="DATA" IsReadOnly="True"/>
+                            <DataGridTextColumn Width="300" Binding="{Binding clientes.nome}" Header="CLIENTE" IsReadOnly="True"/>
+                            <DataGridTextColumn Width="80" Binding="{Binding status}" Header="STATUS" IsReadOnly="True"/>
+                            <DataGridTextColumn Width="*" Binding="{Binding valorTotal, ConverterCulture=pt-BR,StringFormat=#\,##0.00}" Header="VALOR TOTAL" IsReadOnly="True"/>
                         </DataGrid.Columns>
 
                         <DataGrid.Effect>

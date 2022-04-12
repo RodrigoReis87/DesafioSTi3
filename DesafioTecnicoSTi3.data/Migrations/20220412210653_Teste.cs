@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using MySql.EntityFrameworkCore.Metadata;
-using System;
 
 namespace DesafioTecnicoSTi3.data.Migrations
 {
-    public partial class Inicio : Migration
+    public partial class Teste : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,19 +12,17 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 name: "Clientes",
                 columns: table => new
                 {
-                    codigo_cliente = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    id = table.Column<string>(type: "text", nullable: true),
-                    cnpj = table.Column<string>(type: "text", nullable: true),
-                    cpf = table.Column<string>(type: "text", nullable: true),
-                    nome = table.Column<string>(type: "text", nullable: true),
-                    razaoSocial = table.Column<string>(type: "text", nullable: true),
-                    email = table.Column<string>(type: "text", nullable: true),
+                    id = table.Column<string>(type: "varchar(200)", nullable: false),
+                    cnpj = table.Column<string>(type: "varchar (20)", nullable: true),
+                    cpf = table.Column<string>(type: "varchar (20)", nullable: true),
+                    nome = table.Column<string>(type: "varchar (100)", nullable: true),
+                    razaoSocial = table.Column<string>(type: "varchar (100)", nullable: true),
+                    email = table.Column<string>(type: "varchar (70)", nullable: true),
                     dataNascimento = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clientes", x => x.codigo_cliente);
+                    table.PrimaryKey("PK_Clientes", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -46,15 +44,15 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 {
                     codigo = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    id = table.Column<string>(type: "text", nullable: true),
-                    endereco = table.Column<string>(type: "text", nullable: true),
-                    numero = table.Column<string>(type: "text", nullable: true),
-                    cep = table.Column<string>(type: "text", nullable: true),
-                    bairro = table.Column<string>(type: "text", nullable: true),
-                    cidade = table.Column<string>(type: "text", nullable: true),
-                    estado = table.Column<string>(type: "text", nullable: true),
-                    complemento = table.Column<string>(type: "text", nullable: true),
-                    referencia = table.Column<string>(type: "text", nullable: true)
+                    id = table.Column<string>(type: "varchar(20)", nullable: true),
+                    endereco = table.Column<string>(type: "varchar(150)", nullable: true),
+                    numero = table.Column<string>(type: "varchar(20)", nullable: true),
+                    cep = table.Column<string>(type: "varchar(15)", nullable: true),
+                    bairro = table.Column<string>(type: "varchar(150)", nullable: true),
+                    cidade = table.Column<string>(type: "varchar(70)", nullable: true),
+                    estado = table.Column<string>(type: "varchar(30)", nullable: true),
+                    complemento = table.Column<string>(type: "varchar(150)", nullable: true),
+                    referencia = table.Column<string>(type: "varchar(150)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -67,26 +65,26 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 {
                     cod_pedido = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    id = table.Column<string>(type: "text", nullable: true),
-                    numero = table.Column<string>(type: "text", nullable: true),
+                    id = table.Column<string>(type: "varchar(100)", nullable: true),
+                    numero = table.Column<string>(type: "varchar(30)", nullable: true),
                     dataCriacao = table.Column<DateTime>(type: "datetime", nullable: false),
                     dataAlteracao = table.Column<DateTime>(type: "datetime", nullable: false),
-                    status = table.Column<string>(type: "text", nullable: true),
-                    desconto = table.Column<double>(type: "double", nullable: false),
-                    frete = table.Column<double>(type: "double", nullable: false),
-                    subTotal = table.Column<double>(type: "double", nullable: false),
-                    valorTotal = table.Column<double>(type: "double", nullable: false),
-                    clientecodigo_cliente = table.Column<long>(type: "bigint", nullable: true),
+                    status = table.Column<string>(type: "varchar(30)", nullable: true),
+                    desconto = table.Column<double>(type: "double(6,2)", nullable: false),
+                    frete = table.Column<double>(type: "double(6,2)", nullable: false),
+                    subTotal = table.Column<double>(type: "double(6,2)", nullable: false),
+                    valorTotal = table.Column<double>(type: "double(6,2)", nullable: false),
+                    clienteid = table.Column<string>(type: "varchar(200)", nullable: true),
                     enderecoEntregacodigo = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pedidos", x => x.cod_pedido);
                     table.ForeignKey(
-                        name: "FK_Pedidos_Clientes_clientecodigo_cliente",
-                        column: x => x.clientecodigo_cliente,
+                        name: "FK_Pedidos_Clientes_clienteid",
+                        column: x => x.clienteid,
                         principalTable: "Clientes",
-                        principalColumn: "codigo_cliente",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Pedidos_EnderecoEntregas_enderecoEntregacodigo",
@@ -157,9 +155,9 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 column: "pedidocod_pedido");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pedidos_clientecodigo_cliente",
+                name: "IX_Pedidos_clienteid",
                 table: "Pedidos",
-                column: "clientecodigo_cliente");
+                column: "clienteid");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pedidos_enderecoEntregacodigo",

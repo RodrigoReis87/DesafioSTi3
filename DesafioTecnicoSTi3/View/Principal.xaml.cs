@@ -71,45 +71,50 @@ namespace DesafioTecnicoSTi3.View
                 var obj = JsonConvert.DeserializeObject<List<Pedido>>(pedidoCompleto);
 
                 foreach (var item in obj)
-                {                    
-                    //Pedido
-                    UcPedidoVM.id = item.id;
-                    UcPedidoVM.numero = item.numero;
-                    UcPedidoVM.dataAlteracao = item.dataAlteracao;
-                    UcPedidoVM.dataCriacao = item.dataCriacao;
-                    UcPedidoVM.frete = item.frete;
-                    UcPedidoVM.Status = item.status;
-                    UcPedidoVM.desconto = item.desconto;
-                    UcPedidoVM.subTotal = item.subTotal;
-                    UcPedidoVM.ValorTotal = item.valorTotal;
-                    //UcPedidoVM.cliente = new Clientes { item.cliente.codigo_cliente}
+                {
+                    try
+                    {
+                        var novoPedido = new PedidoViewModel
+                        {
+                            id = item.id,
+                            numero = item.numero,
+                            dataAlteracao = item.dataAlteracao,
+                            dataCriacao = item.dataCriacao,
+                            frete = item.frete,
+                            status = item.status,
+                            desconto = item.desconto,
+                            subTotal = item.subTotal,
+                            valorTotal = item.valorTotal,
+                            clientes = new Clientes()
+                            {
+                                id = item.cliente.id,
+                                cnpj = item.cliente.cnpj,
+                                cpf = item.cliente.cpf,
+                                razaoSocial = item.cliente.razaoSocial,
+                                nome = item.cliente.nome,
+                                email = item.cliente.email,
+                                dataNascimento = item.cliente.dataNascimento,
 
-                    //Cliente
-                    UcClienteVM.id = item.cliente.id;
-                    UcClienteVM.cnpj = item.cliente.cnpj;
-                    UcClienteVM.cpf = item.cliente.cpf;
-                    UcClienteVM.nome = item.cliente.nome;
-                    UcClienteVM.razaosocial = item.cliente.razaoSocial;
-                    UcClienteVM.email = item.cliente.email;
-                    UcClienteVM.datadeNascimento = item.cliente.dataNascimento;
-
-                    //Endereço
-                    UcEnderecoVM.id = item.enderecoEntrega.id;
-                    UcEnderecoVM.endereco = item.enderecoEntrega.endereco;
-                    UcEnderecoVM.numero = item.enderecoEntrega.numero;
-                    UcEnderecoVM.cep = item.enderecoEntrega.cep;
-                    UcEnderecoVM.bairro = item.enderecoEntrega.bairro;
-                    UcEnderecoVM.cidade = item.enderecoEntrega.cidade;
-                    UcEnderecoVM.estado = item.enderecoEntrega.estado;
-                    UcEnderecoVM.complemento = item.enderecoEntrega.complemento;
-                    UcEnderecoVM.referencia = item.enderecoEntrega.referencia;
-
-
-                    GravarCliente();
-
-                    GravarEndereço();
-
-                    GravarPedido();
+                            },
+                            enderecoEntrega = new EnderecoEntrega()
+                            {
+                                id = item.enderecoEntrega.id,
+                                endereco = item.enderecoEntrega.endereco,
+                                numero = item.enderecoEntrega.numero,
+                                cep = item.enderecoEntrega.cep,
+                                bairro = item.enderecoEntrega.bairro,
+                                cidade = item.enderecoEntrega.cidade,
+                                estado =    item.enderecoEntrega.estado,
+                                complemento = item.enderecoEntrega.complemento,
+                                referencia = item.enderecoEntrega.referencia,
+                            }
+                        };
+                        new PedidoBusiness().Inserir(novoPedido);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }      
 
                     CarregarRegistros();
 
@@ -117,58 +122,6 @@ namespace DesafioTecnicoSTi3.View
 
 
             }
-        }
-
-        private void GravarPedido()
-        {
-
-            var novoPedido = new PedidoViewModel
-            {
-                id = UcPedidoVM.id,
-                numero = UcPedidoVM.numero,
-                dataAlteracao = UcPedidoVM.dataAlteracao,
-                dataCriacao = UcPedidoVM.dataCriacao,
-                frete = UcPedidoVM.frete,
-                status = UcPedidoVM.Status,
-                desconto = UcPedidoVM.desconto,
-                subTotal = UcPedidoVM.subTotal,
-                valorTotal = UcPedidoVM.ValorTotal
-            };
-            new PedidoBusiness().Inserir(novoPedido);
-        }
-
-        private void GravarCliente()
-        {
-
-            var novoCliente = new ClienteViewModel
-            {
-                id = UcClienteVM.id,
-                cnpj = UcClienteVM.cnpj,
-                cpf = UcClienteVM.cpf,
-                nome = UcClienteVM.nome,
-                razaoSocial = UcClienteVM.razaosocial,
-                email = UcClienteVM.email,
-                dataNascimento = UcClienteVM.datadeNascimento
-            };
-            new ClienteBusiness().Inserir(novoCliente);
-        }
-
-        private void GravarEndereço()
-        {
-
-            var Endereco = new EnderecoEntregaViewModel
-            {
-                id = UcEnderecoVM.id,
-                endereco = UcEnderecoVM.endereco,
-                numero = UcEnderecoVM.numero,
-                cep = UcEnderecoVM.cep,
-                bairro = UcEnderecoVM.bairro,
-                cidade = UcEnderecoVM.cidade,
-                estado = UcEnderecoVM.estado,
-                complemento = UcEnderecoVM.complemento,
-                referencia = UcEnderecoVM.referencia
-            };
-            new EnderecoBusiness().Inserir(Endereco);
         }
 
         private void CarregarRegistros()

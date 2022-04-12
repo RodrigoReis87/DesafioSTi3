@@ -14,28 +14,5 @@ namespace DesafioTecnicoSTi3.Business
             _context = new DesafioTecnicoSTi3Context();
         }
 
-        public void Inserir(EnderecoEntregaViewModel enderecoViewModel)
-        {
-            var endereco = _context.EnderecoEntregas.FirstOrDefault(x => x.id == enderecoViewModel.id);
-
-            if(endereco == null)
-            {
-                endereco = new EnderecoEntrega();
-                _context.EnderecoEntregas.Add(endereco);
-            }
-
-                endereco.id = enderecoViewModel.id;
-                endereco.endereco = enderecoViewModel.endereco;
-                endereco.numero = enderecoViewModel.numero;
-                endereco.cep = enderecoViewModel.cep;
-                endereco.bairro = enderecoViewModel.bairro;
-                endereco.cidade = enderecoViewModel.cidade;
-                endereco.estado = enderecoViewModel.estado;
-                endereco.complemento = enderecoViewModel.complemento;
-                endereco.referencia = enderecoViewModel.referencia;
-            
-
-            _context.SaveChanges();
-        }
     }
 }

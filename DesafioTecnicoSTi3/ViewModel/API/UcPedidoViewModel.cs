@@ -115,9 +115,9 @@ namespace DesafioTecnicoSTi3.ViewModel
             }
         }
 
-        private ObservableCollection<ClienteViewModel> _cliente;
+        private ObservableCollection<UcClienteViewModel> _cliente;
 
-        public ObservableCollection<ClienteViewModel> cliente
+        public ObservableCollection<UcClienteViewModel> cliente
         {
             get => _cliente;
             set

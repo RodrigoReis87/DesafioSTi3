@@ -4,20 +4,10 @@ using System.Collections.ObjectModel;
 namespace DesafioTecnicoSTi3.ViewModel
 {
     public class UcClienteViewModel : PropertyChange
-    {
-        private long _codigocliente;
-        public long codigo_cliente
-        {
-            get => _codigocliente;
-            set
-            {
-                _codigocliente = value;
-                OnPropertyChanged(nameof(codigo_cliente));
-            }
-        }
+    {       
 
-        private string _id;
-        public string id
+        private Guid _id;
+        public Guid id
         {
             get => _id;
             set
@@ -90,6 +80,17 @@ namespace DesafioTecnicoSTi3.ViewModel
             {
                 _datadeNascimento = value;
                 OnPropertyChanged(nameof(datadeNascimento));
+            }
+        }
+
+        private ObservableCollection<PedidoViewModel> _pedidos;
+        public ObservableCollection<PedidoViewModel> pedido
+        {
+            get => _pedidos;
+            set
+            {
+                _pedidos = value;
+                OnPropertyChanged(nameof(pedido));
             }
         }
 

@@ -8,7 +8,14 @@ namespace DesafioTecnicoSTi3.data.Mappings
     {
         public void Configure(EntityTypeBuilder<Clientes> builder)
         {
-            builder.HasKey(p => p.codigo_cliente);
+            builder.HasKey(p => p.id);
+            builder.Property(p=>p.id).HasColumnType("varchar(200)");
+            builder.Property(p => p.cnpj).HasColumnType("varchar (20)");
+            builder.Property(p => p.cpf).HasColumnType("varchar (20)");
+            builder.Property(p => p.nome).HasColumnType("varchar (100)");
+            builder.Property(p => p.razaoSocial).HasColumnType("varchar (100)");
+            builder.Property(p => p.email).HasColumnType("varchar (70)");
+            builder.Property(p => p.dataNascimento).HasColumnType("datetime");
         }
     }
 }
