@@ -48,7 +48,7 @@ namespace DesafioTecnicoSTi3.View
             SincronizarPedidos();
         }
 
-    private void BtnConfig_Click(object sender, RoutedEventArgs e)
+        private void BtnConfig_Click(object sender, RoutedEventArgs e)
         {
             UcConfiguracoes Conteudo = new UcConfiguracoes();
             Conteudo.ShowDialog();
@@ -69,66 +69,72 @@ namespace DesafioTecnicoSTi3.View
             {
                 var pedidoCompleto = response.Content.ReadAsStringAsync().Result;
 
-                var obj = JsonConvert.DeserializeObject<List<Pedido>>(pedidoCompleto);                
+                var obj = JsonConvert.DeserializeObject<List<Pedido>>(pedidoCompleto);
 
-                foreach (var item in obj )
-                {
-                    try
-                    {
-                        var novoPedido = new PedidoViewModel
-                        {
-                            id = item.id,
-                            numero = item.numero,
-                            dataAlteracao = item.dataAlteracao,
-                            dataCriacao = item.dataCriacao,
-                            frete = item.frete,
-                            status = item.status,
-                            desconto = item.desconto,
-                            subTotal = item.subTotal,
-                            valorTotal = item.valorTotal,
-                            clientes = new Clientes()
-                            {
-                                id = item.cliente.id,
-                                cnpj = item.cliente.cnpj,
-                                cpf = item.cliente.cpf,
-                                razaoSocial = item.cliente.razaoSocial,
-                                nome = item.cliente.nome,
-                                email = item.cliente.email,
-                                dataNascimento = item.cliente.dataNascimento,
-
-                            },
-                            enderecoEntrega = new EnderecoEntrega()
-                            {
-                                id = item.enderecoEntrega.id,
-                                endereco = item.enderecoEntrega.endereco,
-                                numero = item.enderecoEntrega.numero,
-                                cep = item.enderecoEntrega.cep,
-                                bairro = item.enderecoEntrega.bairro,
-                                cidade = item.enderecoEntrega.cidade,
-                                estado = item.enderecoEntrega.estado,
-                                complemento = item.enderecoEntrega.complemento,
-                                referencia = item.enderecoEntrega.referencia,
-                            }
-                        };
-                        new PedidoBusiness().Inserir(novoPedido);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }                    
-
-                    CarregarRegistros();
-
-                }
-
+                GerarPedido(obj);
 
             }
+
+            CarregarRegistros();
+        }
+
+
+        private void GerarPedido(List<Pedido> obj)
+        {
+            foreach (var item in obj)
+            {
+                try
+                {
+                    var novoPedido = new PedidoViewModel
+                    {
+                        id = item.id,
+                        numero = item.numero,
+                        dataAlteracao = item.dataAlteracao,
+                        dataCriacao = item.dataCriacao,
+                        frete = item.frete,
+                        status = item.status,
+                        desconto = item.desconto,
+                        subTotal = item.subTotal,
+                        valorTotal = item.valorTotal,
+                        clientes = new Clientes()
+                        {
+                            id = item.cliente.id,
+                            cnpj = item.cliente.cnpj,
+                            cpf = item.cliente.cpf,
+                            razaoSocial = item.cliente.razaoSocial,
+                            nome = item.cliente.nome,
+                            email = item.cliente.email,
+                            dataNascimento = item.cliente.dataNascimento,
+
+                        },
+                        enderecoEntrega = new EnderecoEntrega()
+                        {
+                            id = item.enderecoEntrega.id,
+                            endereco = item.enderecoEntrega.endereco,
+                            numero = item.enderecoEntrega.numero,
+                            cep = item.enderecoEntrega.cep,
+                            bairro = item.enderecoEntrega.bairro,
+                            cidade = item.enderecoEntrega.cidade,
+                            estado = item.enderecoEntrega.estado,
+                            complemento = item.enderecoEntrega.complemento,
+                            referencia = item.enderecoEntrega.referencia,
+                        },
+
+                    };
+                    new PedidoBusiness().Inserir(novoPedido);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
         }
 
         private void CarregarRegistros()
         {
             UcPedidoVM.PedidosAdicionados = new ObservableCollection<PedidoViewModel>(new PedidoBusiness().Listar());
         }
-    }
 
+    }
 }

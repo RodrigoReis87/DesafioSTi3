@@ -79,12 +79,8 @@ namespace DesafioTecnicoSTi3.Business
 
             }
             _context.SaveChanges();
-        }       
+        }      
 
-        public void ConverterParaObjeto(PedidoViewModel item)
-        {
-
-        }
 
         public List<PedidoViewModel> Listar()
         {
