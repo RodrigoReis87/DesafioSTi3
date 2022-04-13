@@ -11,6 +11,6 @@ namespace DesafioTecnicoSTi3.data.Entidades
         public string nome { get; set; }
         public int quantidade { get; set; }
         public double valorUnitario { get; set; }
-        public List<Pedido> pedido { get; set; }
+        public List<Pedido> Pedido { get; set; }
     }
 }

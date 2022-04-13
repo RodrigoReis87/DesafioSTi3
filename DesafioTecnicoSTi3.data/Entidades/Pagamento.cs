@@ -1,4 +1,8 @@
-﻿namespace DesafioTecnicoSTi3.data.Entidades
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace DesafioTecnicoSTi3.data.Entidades
 {
     public class Pagamento
     {
@@ -8,7 +12,7 @@
         public double valor { get; set; }
         public string codigo { get; set; }
         public string nome { get; set; }
-        public long IdPedido { get; set; }
-        public Pedido pedido { get; set; }
+        public List<Pedido> pedido { get; set; }
     }
 }
+

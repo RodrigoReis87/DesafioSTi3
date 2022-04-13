@@ -1,4 +1,6 @@
-﻿namespace DesafioTecnicoSTi3.ViewModel.API
+﻿using System.Collections.ObjectModel;
+
+namespace DesafioTecnicoSTi3.ViewModel.API
 {
     public class UcItemViewModel : PropertyChange
     {
@@ -65,6 +67,18 @@
             {
                 _valorUnitario = value;
                 OnPropertyChanged(nameof(valorUnitario));
+            }
+        }
+
+        private ObservableCollection<PedidoViewModel> _pedido;
+
+        public ObservableCollection<PedidoViewModel> Pedido
+        {
+            get => _pedido;
+            set
+            {
+                _pedido = value;
+                OnPropertyChanged(nameof(Pedido));
             }
         }
     }

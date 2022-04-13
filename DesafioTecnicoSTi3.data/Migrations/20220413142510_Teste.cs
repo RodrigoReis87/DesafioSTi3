@@ -60,13 +60,29 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Formas_Pagto",
+                columns: table => new
+                {
+                    cod_pgto = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    id = table.Column<string>(type: "text", nullable: true),
+                    parcela = table.Column<int>(type: "int", nullable: false),
+                    valor = table.Column<double>(type: "double", nullable: false),
+                    codigo = table.Column<string>(type: "text", nullable: true),
+                    nome = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Formas_Pagto", x => x.cod_pgto);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Itens",
                 columns: table => new
                 {
-                    codigo_item = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    idProduto = table.Column<string>(type: "varchar(767)", nullable: false),
+                    codigo_item = table.Column<long>(type: "bigint", nullable: false),
                     id = table.Column<string>(type: "text", nullable: true),
-                    idProduto = table.Column<string>(type: "text", nullable: true),
                     idPedido = table.Column<string>(type: "text", nullable: true),
                     nome = table.Column<string>(type: "text", nullable: true),
                     quantidade = table.Column<int>(type: "int", nullable: false),
@@ -74,7 +90,7 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Itens", x => x.codigo_item);
+                    table.PrimaryKey("PK_Itens", x => x.idProduto);
                 });
 
             migrationBuilder.CreateTable(
@@ -112,63 +128,62 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ItemPedido",
+                name: "Itens_pedido",
                 columns: table => new
                 {
-                    itenscodigo_item = table.Column<long>(type: "bigint", nullable: false),
-                    pedidocod_pedido = table.Column<long>(type: "bigint", nullable: false)
+                    ItemId = table.Column<long>(type: "bigint", nullable: false),
+                    PedidoId = table.Column<string>(type: "varchar(767)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ItemPedido", x => new { x.itenscodigo_item, x.pedidocod_pedido });
+                    table.PrimaryKey("PK_Itens_pedido", x => new { x.ItemId, x.PedidoId });
                     table.ForeignKey(
-                        name: "FK_ItemPedido_Itens_itenscodigo_item",
-                        column: x => x.itenscodigo_item,
-                        principalTable: "Itens",
-                        principalColumn: "codigo_item",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ItemPedido_Pedidos_pedidocod_pedido",
-                        column: x => x.pedidocod_pedido,
+                        name: "FK_Itens_pedido_ItemId",
+                        column: x => x.ItemId,
                         principalTable: "Pedidos",
                         principalColumn: "cod_pedido",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Itens_pedido_PedidoId",
+                        column: x => x.PedidoId,
+                        principalTable: "Itens",
+                        principalColumn: "idProduto",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pagamento",
+                name: "Pagamento_pedido",
                 columns: table => new
                 {
-                    cod_pgto = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    id = table.Column<string>(type: "text", nullable: true),
-                    parcela = table.Column<int>(type: "int", nullable: false),
-                    valor = table.Column<double>(type: "double", nullable: false),
-                    codigo = table.Column<string>(type: "text", nullable: true),
-                    nome = table.Column<string>(type: "text", nullable: true),
-                    IdPedido = table.Column<long>(type: "bigint", nullable: false),
-                    pedidocod_pedido = table.Column<long>(type: "bigint", nullable: true)
+                    PagtoId = table.Column<long>(type: "bigint", nullable: false),
+                    PedidoId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pagamento", x => x.cod_pgto);
+                    table.PrimaryKey("PK_Pagamento_pedido", x => new { x.PagtoId, x.PedidoId });
                     table.ForeignKey(
-                        name: "FK_Pagamento_Pedidos_pedidocod_pedido",
-                        column: x => x.pedidocod_pedido,
+                        name: "FK_Pagamento_pedido_PagtoId",
+                        column: x => x.PagtoId,
+                        principalTable: "Formas_Pagto",
+                        principalColumn: "cod_pgto",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Pagamento_pedido_PedidoId",
+                        column: x => x.PedidoId,
                         principalTable: "Pedidos",
                         principalColumn: "cod_pedido",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItemPedido_pedidocod_pedido",
-                table: "ItemPedido",
-                column: "pedidocod_pedido");
+                name: "IX_Itens_pedido_PedidoId",
+                table: "Itens_pedido",
+                column: "PedidoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pagamento_pedidocod_pedido",
-                table: "Pagamento",
-                column: "pedidocod_pedido");
+                name: "IX_Pagamento_pedido_PedidoId",
+                table: "Pagamento_pedido",
+                column: "PedidoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pedidos_clienteid",
@@ -187,13 +202,16 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 name: "Configuracoes");
 
             migrationBuilder.DropTable(
-                name: "ItemPedido");
+                name: "Itens_pedido");
 
             migrationBuilder.DropTable(
-                name: "Pagamento");
+                name: "Pagamento_pedido");
 
             migrationBuilder.DropTable(
                 name: "Itens");
+
+            migrationBuilder.DropTable(
+                name: "Formas_Pagto");
 
             migrationBuilder.DropTable(
                 name: "Pedidos");

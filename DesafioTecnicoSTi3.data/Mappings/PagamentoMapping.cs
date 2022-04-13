@@ -8,6 +8,7 @@ namespace DesafioTecnicoSTi3.data.Mappings
     {
         public void Configure(EntityTypeBuilder<Pagamento> builder)
         {
+            builder.ToTable("Formas_Pagto");
             builder.HasKey(p => p.cod_pgto);
         }
     }

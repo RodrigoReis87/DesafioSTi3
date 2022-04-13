@@ -99,17 +99,16 @@ namespace DesafioTecnicoSTi3.data.Migrations
 
             modelBuilder.Entity("DesafioTecnicoSTi3.data.Entidades.Item", b =>
                 {
+                    b.Property<string>("idProduto")
+                        .HasColumnType("varchar(767)");
+
                     b.Property<long>("codigo_item")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
                     b.Property<string>("id")
                         .HasColumnType("text");
 
                     b.Property<string>("idPedido")
-                        .HasColumnType("text");
-
-                    b.Property<string>("idProduto")
                         .HasColumnType("text");
 
                     b.Property<string>("nome")
@@ -121,7 +120,7 @@ namespace DesafioTecnicoSTi3.data.Migrations
                     b.Property<double>("valorUnitario")
                         .HasColumnType("double");
 
-                    b.HasKey("codigo_item");
+                    b.HasKey("idProduto");
 
                     b.ToTable("Itens");
                 });
@@ -130,9 +129,6 @@ namespace DesafioTecnicoSTi3.data.Migrations
                 {
                     b.Property<long>("cod_pgto")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("IdPedido")
                         .HasColumnType("bigint");
 
                     b.Property<string>("codigo")
@@ -147,17 +143,12 @@ namespace DesafioTecnicoSTi3.data.Migrations
                     b.Property<int>("parcela")
                         .HasColumnType("int");
 
-                    b.Property<long?>("pedidocod_pedido")
-                        .HasColumnType("bigint");
-
                     b.Property<double>("valor")
                         .HasColumnType("double");
 
                     b.HasKey("cod_pgto");
 
-                    b.HasIndex("pedidocod_pedido");
-
-                    b.ToTable("Pagamento");
+                    b.ToTable("Formas_Pagto");
                 });
 
             modelBuilder.Entity("DesafioTecnicoSTi3.data.Entidades.Pedido", b =>
@@ -208,28 +199,34 @@ namespace DesafioTecnicoSTi3.data.Migrations
                     b.ToTable("Pedidos");
                 });
 
-            modelBuilder.Entity("ItemPedido", b =>
+            modelBuilder.Entity("Itens_pedido", b =>
                 {
-                    b.Property<long>("itenscodigo_item")
+                    b.Property<long>("ItemId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("pedidocod_pedido")
-                        .HasColumnType("bigint");
+                    b.Property<string>("PedidoId")
+                        .HasColumnType("varchar(767)");
 
-                    b.HasKey("itenscodigo_item", "pedidocod_pedido");
+                    b.HasKey("ItemId", "PedidoId");
 
-                    b.HasIndex("pedidocod_pedido");
+                    b.HasIndex("PedidoId");
 
-                    b.ToTable("ItemPedido");
+                    b.ToTable("Itens_pedido");
                 });
 
-            modelBuilder.Entity("DesafioTecnicoSTi3.data.Entidades.Pagamento", b =>
+            modelBuilder.Entity("Pagamento_pedido", b =>
                 {
-                    b.HasOne("DesafioTecnicoSTi3.data.Entidades.Pedido", "pedido")
-                        .WithMany("pagamento")
-                        .HasForeignKey("pedidocod_pedido");
+                    b.Property<long>("PagtoId")
+                        .HasColumnType("bigint");
 
-                    b.Navigation("pedido");
+                    b.Property<long>("PedidoId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("PagtoId", "PedidoId");
+
+                    b.HasIndex("PedidoId");
+
+                    b.ToTable("Pagamento_pedido");
                 });
 
             modelBuilder.Entity("DesafioTecnicoSTi3.data.Entidades.Pedido", b =>
@@ -249,17 +246,36 @@ namespace DesafioTecnicoSTi3.data.Migrations
                     b.Navigation("enderecoEntrega");
                 });
 
-            modelBuilder.Entity("ItemPedido", b =>
+            modelBuilder.Entity("Itens_pedido", b =>
                 {
+                    b.HasOne("DesafioTecnicoSTi3.data.Entidades.Pedido", null)
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .HasConstraintName("FK_Itens_pedido_ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DesafioTecnicoSTi3.data.Entidades.Item", null)
                         .WithMany()
-                        .HasForeignKey("itenscodigo_item")
+                        .HasForeignKey("PedidoId")
+                        .HasConstraintName("FK_Itens_pedido_PedidoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Pagamento_pedido", b =>
+                {
+                    b.HasOne("DesafioTecnicoSTi3.data.Entidades.Pagamento", null)
+                        .WithMany()
+                        .HasForeignKey("PagtoId")
+                        .HasConstraintName("FK_Pagamento_pedido_PagtoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DesafioTecnicoSTi3.data.Entidades.Pedido", null)
                         .WithMany()
-                        .HasForeignKey("pedidocod_pedido")
+                        .HasForeignKey("PedidoId")
+                        .HasConstraintName("FK_Pagamento_pedido_PedidoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -267,11 +283,6 @@ namespace DesafioTecnicoSTi3.data.Migrations
             modelBuilder.Entity("DesafioTecnicoSTi3.data.Entidades.Clientes", b =>
                 {
                     b.Navigation("pedido");
-                });
-
-            modelBuilder.Entity("DesafioTecnicoSTi3.data.Entidades.Pedido", b =>
-                {
-                    b.Navigation("pagamento");
                 });
 #pragma warning restore 612, 618
         }

@@ -17,7 +17,7 @@ namespace DesafioTecnicoSTi3.data.Entidades
         public double valorTotal { get; set; }
         public Clientes cliente { get; set; }
         public EnderecoEntrega enderecoEntrega { get; set; }
-        public List<Item> itens { get; set; }
+        public List<Item> Item { get; set; }
         public List<Pagamento> pagamento { get; set; }
     }
 }

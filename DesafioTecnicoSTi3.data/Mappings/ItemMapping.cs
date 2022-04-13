@@ -8,7 +8,7 @@ namespace DesafioTecnicoSTi3.data.Mappings
     {
         public void Configure(EntityTypeBuilder<Item> builder)
         {
-            builder.HasKey(p => p.codigo_item);
+            builder.HasKey(p => p.idProduto);
         }
     }
 }

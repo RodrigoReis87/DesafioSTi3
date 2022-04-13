@@ -81,6 +81,11 @@ namespace DesafioTecnicoSTi3.Business
             _context.SaveChanges();
         }       
 
+        public void ConverterParaObjeto(PedidoViewModel item)
+        {
+
+        }
+
         public List<PedidoViewModel> Listar()
         {
             return _context.Pedidos.AsNoTracking()
